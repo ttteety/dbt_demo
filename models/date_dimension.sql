@@ -5,8 +5,7 @@ WITH cte AS (
         hour(to_timestamp(started_at)) as hour_started_at,
         {{ day_type('STARTED_AT') }} as day_type,
         {{ get_season('STARTED_AT')}} as station_of_year,
-    from {{ source('demo', 'bike') }}
-    where started_at != 'started_at'
+    from {{ ref('stg_bike') }}
 )
 select *
 from cte 

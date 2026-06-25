@@ -7,9 +7,7 @@ with trips as (
         end_station_id,
         member_csual as member_casual,
         timestampdiff(second, to_timestamp(started_at), to_timestamp(ended_at)) as trip_duration_seconds,
-    from {{ source('demo', 'bike') }}
-    where ride_id != 'ride_id'
-    limit 10
+    from {{ ref('stg_bike') }}
 )
 select *
 from trips 
